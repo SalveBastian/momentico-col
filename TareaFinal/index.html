@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Momentico Café</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <!-- Google Fonts -->
+  <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" href="IMG/image1.png" type="image/x-icon">
+  <!-- AOS (animaciones al hacer scroll) -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --rosa-pastel: #f7b6c2;
+      --rosa-claro: #fde2e4;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--rosa-claro);
+      /* Fondo corazones estilo marca de agua */
+      background-image: radial-gradient(circle at 20px 20px, rgba(247,182,194,0.2) 8px, transparent 0),
+                        radial-gradient(circle at 60px 60px, rgba(247,182,194,0.2) 8px, transparent 0);
+      background-size: 80px 80px;
+    }
+
+    
+    h1, h2, h3, h4, h5, h6 {
+    font-family: 'Great Vibes', cursive;
+    }
+
+    section p, 
+    .description p {
+        font-family: 'Raleway', sans-serif;
+        font-weight: 300;
+        font-size: 1.05rem;
+        line-height: 1.6;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: linear-gradient(90deg, #f7b6c2, #fddde6);
+      transition: background 0.5s ease;
+    }
+
+    .navbar.scrolled {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .navbar-brand img {
+      height: 65px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .nav-link {
+      position: relative;
+      color: #fff !important;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      background: #fff;
+      left: 0;
+      bottom: -5px;
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Carrusel */
+    #carouselMomentico {
+      max-height: 500px;
+      overflow: hidden;
+    }
+
+    #carouselMomentico img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    @media (max-width: 768px) {
+      #carouselMomentico img {
+        height: 300px;
+      }
+    }
+
+    /* Productos estrella */
+    .wave-divider {
+      line-height: 0;
+    }
+
+    .productos-estrella {
+      background: linear-gradient(180deg, #f7b6c2 0%, #f28ba7 100%);
+      color: #fff;
+      padding: 60px 0;
+    }
+
+    .productos-estrella h2 {
+      color: #fff;
+    }
+
+    .product-star {
+      width: 80%;
+      max-width: 900px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .img-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 50%;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+      flex-shrink: 0;
+    }
+
+    .img-container img {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 50%;
+      transition: transform 0.5s ease, filter 0.5s ease;
+    }
+
+    .img-container:hover img {
+      transform: scale(1.05);
+      filter: brightness(0.7);
+    }
+
+    .description {
+      background: rgba(255, 255, 255, 0.95);
+      color: #333;
+      padding: 20px;
+      text-align: left;
+      border-radius: 15px;
+      min-width: 300px;
+      max-width: 400px;
+      opacity: 0;
+      transform: translateX(50px);
+      transition: all 0.5s ease;
+    }
+
+    .product-star:hover .description {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Contacto */
+    .contacto {
+      background-color: #fde2e4;
+      border-top: 4px solid #f7b6c2;
+    }
+
+    .contacto h2 {
+      font-weight: 700;
+      color: #d63384;
+    }
+
+    .contacto .btn {
+      background: var(--rosa-pastel);
+      border: none;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .contacto .btn:hover {
+      background: #e69cae;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--rosa-pastel);
+      color: #fff;
+      padding: 20px 0;
+    }
+
+    footer .footer-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    footer img {
+      height: 50px;
+      border-radius: 10px;
+    }
+
+    footer a {
+      color: #fff;
+      margin: 0 10px;
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: #ffe6ec;
+    }
+
+    /* Iconos flotantes */
+    .social-float {
+      position: fixed;
+      right: 20px;
+      bottom: 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      z-index: 1000;
+    }
+
+    .social-float a {
+      background: var(--rosa-pastel);
+      color: white;
+      font-size: 1.5rem;
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: background 0.3s ease;
+    }
+
+    .social-float a:hover {
+      background: #e69cae;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="IMG/image01.jpg" alt="Momentico Logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="menu.html">Menú</a></li>
+          <li class="nav-item"><a class="nav-link" href="reservas.html">Reservas en línea</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#productos">Promociones</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Carrusel -->
+  <div id="carouselMomentico" class="carousel slide mb-5" data-bs-ride="carousel" data-bs-interval="2000">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="Pastel 1">
+      </div>
+      <div class="carousel-item">
+        <img src="IMG/image04.jpeg" class="d-block w-100" alt="Pastel 2">
+      </div>
+      <div class="carousel-item">
+        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="Café 1">
+      </div>
+    </div>
+  </div>
+
+  <!-- Descripción -->
+  <section class="py-5 text-center container">
+    <h2 class="mb-3">Medellín, Colombia</h2>
+    <p class="lead">
+      ¡Con cariño y esfuerzo, transformamos tus sueños en momenticos que van de la boca al corazón!<br>
+      🎂 Pastelería creativa & desayunos sorpresa<br>
+      ✨ Detalles que llegan de la boca al corazón<br>
+      📍 Itagüí – Entregas a domicilio
+    </p>
+    <p class="mt-4">
+      Somos <strong>Momentico</strong>, un emprendimiento enfocado en la repostería y en crear momentos únicos e inolvidables.  
+      Nos especializamos en todo tipo de pastelería: puedes hacer pedidos de nuestros productos o dejar volar tu imaginación para diseñar un pedido totalmente personalizado.  
+    </p>
+  </section>
+
+  <!-- Separador onda -->
+  <div class="wave-divider">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+      <path fill="#f7b6c2" fill-opacity="1" 
+            d="M0,128L40,133.3C80,139,160,149,240,144C320,139,400,117,480,122.7C560,128,640,160,720,154.7C800,149,880,107,960,106.7C1040,107,1120,149,1200,160C1280,171,1360,149,1400,138.7L1440,128L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z">
+      </path>
+    </svg>
+  </div>
+
+  <!-- Productos estrella -->
+  <section id="productos" class="productos-estrella text-center">
+    <div class="container">
+      <h2 class="mb-5">✨ Nuestros Productos Estrella ✨</h2>
+      <div class="d-flex flex-column align-items-center gap-5">
+        
+        <!-- Producto 1 -->
+        <div class="product-star" data-aos="fade-up" data-aos-delay="100">
+          <div class="img-container">
+            <img src="IMG/image02.jpeg" alt="Red Velvet">
+          </div>
+          <div class="description">
+            <h5>Torta Red Velvet</h5>
+            <p>Suave y elegante, con frosting de queso crema. Ideal para celebraciones especiales.</p>
+            <span class="badge bg-dark">Más vendido</span>
+          </div>
+        </div>
+
+        <!-- Producto 2 -->
+        <div class="product-star" data-aos="fade-up" data-aos-delay="200">
+          <div class="img-container">
+            <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=600&q=80" alt="Cappuccino">
+          </div>
+          <div class="description">
+            <h5>Cappuccino Cremoso</h5>
+            <p>La mezcla perfecta de espresso intenso y espuma de leche suave.</p>
+            <span class="badge bg-dark">Favorito</span>
+          </div>
+        </div>
+
+        <!-- Producto 3 -->
+        <div class="product-star" data-aos="fade-up" data-aos-delay="300">
+          <div class="img-container">
+            <img src="IMG/image03.jpeg" alt="Desayuno Sorpresa">
+          </div>
+          <div class="description">
+            <h5>Desayuno Sorpresa</h5>
+            <p>Un detalle especial para comenzar el día con amor y dulzura.</p>
+            <span class="badge bg-dark">Exclusivo</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Separador onda antes del contacto -->
+  <div class="wave-divider">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+      <path fill="#f7b6c2" fill-opacity="1" 
+            d="M0,64L40,85.3C80,107,160,149,240,176C320,203,400,213,480,202.7C560,192,640,160,720,138.7C800,117,880,107,960,106.7C1040,107,1120,117,1200,128C1280,139,1360,149,1400,154.7L1440,160L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z">
+      </path>
+    </svg>
+  </div>
+
+  <!-- Contacto -->
+<!-- Contacto -->
+<section class="contacto py-5">
+  <div class="container text-center">
+    <h2 class="mb-4">📩 Contáctanos</h2>
+    <p class="mb-5">¿Quieres hacer un pedido especial o tienes dudas? Déjanos tus datos y nos pondremos en contacto contigo.</p>
+    
+    <form class="mx-auto" style="max-width:600px;">
+      <div class="mb-3 text-start">
+        <label for="nombre" class="form-label">Nombre completo</label>
+        <input type="text" class="form-control" id="nombre" placeholder="Escribe tu nombre" required>
+      </div>
+      <div class="mb-3 text-start">
+        <label for="correo" class="form-label">Correo electrónico</label>
+        <input type="email" class="form-control" id="correo" placeholder="ejemplo@correo.com" required>
+      </div>
+      <!-- Nuevo campo de descripción -->
+      <div class="mb-3 text-start">
+        <label for="descripcion" class="form-label">Descripción</label>
+        <textarea class="form-control" id="descripcion" rows="4" placeholder="Escribe tu mensaje o descripción aquí..." required></textarea>
+      </div>
+      <button type="submit" class="btn btn-dark px-4">Enviar</button>
+    </form>
+  </div>
+</section>
+
+  <!-- Footer -->
+  <footer class="text-center">
+    <div class="container footer-content">
+      <img src="IMG/Image01.jpg" alt="Logo Footer">
+      <div>
+        <a href="#"><i class="bi bi-instagram"></i></a>
+        <a href="#"><i class="bi bi-tiktok"></i></a>
+        <a href="#"><i class="bi bi-whatsapp"></i></a>
+      </div>
+    </div>
+    <p class="mt-3 mb-0">© 2025 Momentico Café. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- Iconos flotantes -->
+  <div class="social-float">
+    <a href="https://www.instagram.com/momentico.col/" target="_blank"><i class="bi bi-instagram"></i></a>
+    <a href="https://www.tiktok.com/@momentico.coll?_t=ZS-90AM5T2GySG&_r=1" target="_blank"><i class="bi bi-tiktok"></i></a>
+    <a href="#"><i class="bi bi-whatsapp"></i></a>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- AOS JS -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+
+    // Navbar animada al hacer scroll
+    window.addEventListener("scroll", () => {
+      const navbar = document.querySelector(".navbar");
+      if (window.scrollY > 50) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+    });
+  </script>
+</body>
+</html>
